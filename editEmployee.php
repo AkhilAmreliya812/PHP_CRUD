@@ -22,6 +22,7 @@
             $lastName = $raw['lastName'];
             $dob = $raw['dob'];
             $salary = $raw['salary'];
+            $empPhoto = $raw['empPhoto'];
             
         ?>
 
@@ -64,12 +65,12 @@
             </div>
         </div>
 
-        <!-- <div class="my-4 row justify-content-md-center">
-                <label for="photo" class="col-sm-1 col-form-label">Photo</label>
-            <div class="col-sm-4">
-                <input type="file" name="photo" class="form-control" id="photo">
+        <div class="my-4 row justify-content-md-center">
+                <label for="photo" class="col-sm-2 col-form-label">Employee Photo</label>
+            <div class="col-sm-3">
+                <input type="file" name="fileUpload" value="<?php echo $empPhoto?>" class="form-control" id="empPhoto">
             </div>
-        </div> -->
+        </div>
 
         <div class="my-4 row justify-content-md-center">
             <a href="index.php" class="btn btn-secondary col-sm-1 mx-3" id="back">Back</a>
