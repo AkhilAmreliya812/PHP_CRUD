@@ -9,7 +9,7 @@
         $run=mysqli_query($conn,$query);
     
         if($run) {
-            header('location:index.php');
+            header('location:home.php');
         } else {
             echo $query;
         }
