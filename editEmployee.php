@@ -109,7 +109,7 @@
         $runUpdateQuery = mysqli_query($conn,$updateQuery);
 
         if($runUpdateQuery) {
-            header('location:index.php');
+            header('location:home.php');
         }
     }
 
