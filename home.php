@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,19 +13,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />			
-	<link rel="stylesheet" href="dataTable.css">
-    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+	<link href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />			
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <title>Home</title>
 </head>
 <body>
-    <?php
-        include_once 'connection.php';
-        
-        $sql="SELECT * FROM `employee` ORDER BY id DESC";
-        $run=mysqli_query($conn,$sql);
-
-    ?>
+    
     <a href="addEmployee.php" class="row justify-content-md-left btn btn-primary my-3 mx-5">Create New Employee</a>
     <div class="table">
         <table class="table table-hover mx-2" id="employeeData">
@@ -39,15 +35,24 @@
             <tbody>
 
                 <?php 
-                    while ($raw=mysqli_fetch_array($run)) { 
+                    include_once 'connection.php';
 
-                        $id = $raw['id'];   
-                        $firstName = $raw['firstName'];
-                        $lastName = $raw['lastName'];
-                        $dob = $raw['dob'];
-                        $username = $raw['username'];
-                        $salary = $raw['salary'];
-                        $empPhoto = $raw['empPhoto'];
+                    $user = $_SESSION['user'];
+                    if($user == false) {
+                        header('location:index.php');
+                    }
+        
+                    $sql="SELECT * FROM `employee`";
+                    $run=mysqli_query($conn,$sql);
+
+                    while ($row = mysqli_fetch_array($run)) {
+                        $id = $row['id'];   
+                        $firstName = $row['firstName'];
+                        $lastName = $row['lastName'];
+                        $dob = $row['dob'];
+                        $username = $row['username'];
+                        $salary = $row['salary'];
+                        $empPhoto = $row['empPhoto'];
                 ?>
 
                 <tr>
@@ -73,8 +78,11 @@
     
     <script>
         $(document).ready(function () {
-            $('#employeeData').DataTable();
+            let table = $('#employeeData');//.DataTable();
+            table.DataTable();
         } );
+
+
     </script>
 </body>
 </html>
